@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <title>マイページ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow-y: scroll;
+            background-color: rgb(230, 250, 249);
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        img.logo {
+            padding: 0.5em;
+            height: 3em;
+        }
+
+        i {
+            width: 1em;
+            margin-right: 0.5em;
+        }
+
+        header {
+            background-color: #FFFFFF;
+            color: black;
+            border-bottom: 2px solid rgb(255, 2, 2);
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                display: flex;
+
+                h1 {
+                    padding: 0.5rem;
+                }
+            }
+        }
+
+        div.container {
+            height: calc(100% - 3.5em);
+            width: 100%;
+            display: flex;
+        }
+
+        nav {
+            height: 100%;
+            background-color: #F3EDED;
+            width: 10em;
+            border: 1px whitesmoke solid;
+
+            ul {
+                li {
+                    padding: 0.5rem;
+                }
+            }
+        }
+
+        main {
+            height: calc(100% - 3em);
+            /*width: calc(100% - 12.5em);*/
+            width: 100%;
+
+            div {
+                width: 100%;
+                box-sizing: inherit;
+            }
+        }
+
+        /* グラフ */
+        div.top {
+            display: flex;
+
+            .left {
+                width: 30em;
+            }
+
+            .right {
+                width: calc(100% - 30em - 4.3em);
+
+                .future {
+                    height: 15em
+                }
+
+                .now {
+                    height: 15em;
+                }
+            }
+        }
+
+        div.bottom {
+            display: flex;
+
+            .left {
+                width: calc((100% - 4em) / 2);
+            }
+
+            .right {
+                width: calc((100% - 4em) / 2);
+            }
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid lightblue;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.5em;
+        }
+
+        thead th {
+            background-color: lightblue;
+        }
+
+        tbody td:nth-of-type(1) {
+            text-align: center;
+        }
+
+        div.card {
+            margin: 0.5em;
+            padding: 0.5em;
+            border-radius: 20px;
+            border: 1px gray solid;
+            background-color: white;
+
+            div.title {
+                font-size: 1.2em;
+                font-weight: bold;
+                width: 100%;
+                border-bottom: 3px solid lightblue;
+                margin-bottom: 0.5em;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                div {
+                    width: auto;
+                }
+
+                button {
+                    background-color: lightblue;
+                    padding: 0.2em;
+                    font-weight: bold;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        div.card-skin {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+        }
+
+        /* スライドショー */
+        div.slideshow {
+            width: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* ↓ スライドの外枠 */
+        .slide-wrapper {
+            width: 100%;
+            height: 20em;
+            position: relative;
+            overflow: hidden;
+            /* はみ出したスライドを隠す */
+        }
+
+        /*  ↓ スライド（コンテンツ） */
+        .slide {
+            /*スライド全体 */
+            width: 300%;
+            height: 100%;
+            display: flex;
+            transition: all 0.3s;
+        }
+
+        .slide div {
+            /* スライド */
+            width: 33.33%;
+            height: 100%;
+            font-size: 16px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide1 {
+            /* スライドさせるために必要なクラス */
+            transform: translateX(0);
+        }
+
+        .slide2 {
+            /* スライドさせるために必要なクラス */
+            transform: translateX(-33.33%);
+        }
+
+        .slide3 {
+            /* スライドさせるために必要なクラス */
+            transform: translateX(-66.66%);
+        }
+
+        .slide div:nth-of-type(1) {
+            /* 背景色 */
+            background-color: #E1F3FC;
+        }
+
+        .slide div:nth-of-type(2) {
+            /* 背景色 */
+            background-color: #FCE8F0;
+        }
+
+        .slide div:nth-of-type(3) {
+            /* 背景色 */
+            background-color: #E3F1E4;
+        }
+
+        /* ↓ 左右のボタン */
+        .next {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            right: 10px;
+            bottom: 50%;
+            z-index: 10;
+            cursor: pointer;
+            border-top: solid 3px #000;
+            border-right: solid 3px #000;
+            -webkit-transform: rotate(45deg) translateY(50%);
+            transform: rotate(45deg) translateY(50%);
+        }
+
+        .prev {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 25px;
+            bottom: 50%;
+            z-index: 10;
+            cursor: pointer;
+            border-top: solid 3px #000;
+            border-right: solid 3px #000;
+            -webkit-transform: rotate(-135deg) translateY(-50%);
+            transform: rotate(-135deg) translateY(-50%);
+        }
+
+        /* ↓ インジケーター */
+        .indicator {
+            width: 100%;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            column-gap: 18px;
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .indicator li {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            list-style: none;
+            background-color: #fff;
+            border: 2px #000 solid;
+            cursor: pointer;
+        }
+
+        .indicator li:first-of-type {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img class="logo" src="./logo.png" />
+            <h1>エームサービス株式会社</h1>
+        </div>
+        <div>
+            <h1>≡</h1>
+        </div>
+    </header>
+    <div class="container">
+        <!--
+		<nav>
+			<ul>
+				<li><a href="#"><i class="fa-solid fa-person"></i>マイページ</a></li>
+				<li><a href="#"><i class="fa-solid fa-building"></i>事業所</a></li>
+				<li><a href="#"><i class="fa-solid fa-comment-dots"></i>チャット</a></li>
+			</ul>
+		</nav>
+		-->
+        <main>
+            <div class="slideshow">
+                <!-- スライドの外枠 -->
+                <div class="slide-wrapper">
+                    <!-- スライド（コンテンツ） -->
+                    <div id="slide" class="slide">
+                        <div>
+                            <!-- <img src="/APP/work/img/path" /> -->
+                            <p>スライド１</p>
+                        </div>
+                        <div>
+                            <!-- <img src="/APP/work/img/path" /> -->
+                            <p>スライド２</p>
+                        </div>
+                        <div>
+                            <!-- <img src="/APP/work/img/path" /> -->
+                            <p>スライド３</p>
+                        </div>
+                    </div>
+                    <!-- 左右のボタン -->
+                    <span id="prev" class="prev"></span>
+                    <span id="next" class="next"></span>
+                    <!-- インジケーター -->
+                    <ul class="indicator" id="indicator">
+                        <li class="list"></li>
+                        <li class="list"></li>
+                        <li class="list"></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="top">
+                    <div class="card card-skin left">
+                        <div style="height: 30em;width: 30em;">
+                            <canvas id="myRadarChart" height="10em" width="10em" style="height: 160px"></canvas>
+                            <script>
+                                let ctx = document.getElementById('myRadarChart');
+                                let myChart = new Chart(ctx, {
+                                    type: 'radar',
+                                    data: {
+                                        labels: ["1", "2", "3", "4", "5"],
+                                        datasets: [
+                                            {
+                                                label: "現在",
+                                                data: [25, 21, 38, 28, 20],
+                                                backgroundColor: "rgba(67, 133, 215, 0.5)",
+                                                borderColor: "rgba(67, 133, 215, 1)",
+                                            },
+                                            {
+                                                label: "将来",
+                                                data: [40, 38, 47, 42, 35],
+                                                backgroundColor: "rgba(214, 91, 91, 0.5)",
+                                                borderColor: "rgba(214, 91, 91, 1)",
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        scales: {
+                                            r: {
+                                                max: 50,
+                                                min: 0,
+                                                ticks: {
+                                                    stepSize: 5,
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="card card-skin future">
+                            <div class="title">
+                                <p>将来</p>
+                            </div>
+                            <ul>
+                                <li>ここに将来の目標像を書く</li>
+                            </ul>
+                        </div>
+                        <div class="card card-skin now">
+                            <div class="title">
+                                <p>現在</p>
+                            </div>
+                            <ul>
+                                <li>ここに現在のスキルなどを書く</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="card card-skin left">
+                        <div class="title">
+                            <p>研修履歴</p>
+                            <div>
+                                <button type="button">予約</button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>研修名</th>
+                                    <th>日時</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td>新人研修</td>
+                                    <td>2023年4月3日</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td>ビジネスマナー研修</td>
+                                    <td>2023年4月5日</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td>マネジメント研修</td>
+                                    <td>2023年4月7日</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card card-skin right">
+                        <div class="title">
+                            <p>面談</p>
+                            <div>
+                                <button type="button">予約</button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>面談名</th>
+                                    <th>相手</th>
+                                    <th>場所</th>
+                                    <th>日時</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>相談</td>
+                                    <td>高橋マネージャ</td>
+                                    <td>会議室（中）</td>
+                                    <td>2024年1月14日</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script>
+    const slide = document.getElementById('slide');
+    const lists = document.querySelectorAll('.list');
+    const totalSlides = lists.length;
+    const prev = document.getElementById('prev');
+    const indicator = document.getElementById('indicator');
+    const next = document.getElementById('next');
+    let count = 0;
+    let autoPlayInterval;
+    function updateListBackground() {
+        for (let i = 0; i < lists.length; i++) {
+            lists[i].style.backgroundColor = i === count % totalSlides ? '#000' : '#fff';
+        }
+    }
+    function nextClick() {
+        slide.classList.remove(`slide${count % totalSlides + 1}`);
+        count++;
+        slide.classList.add(`slide${count % totalSlides + 1}`);
+        updateListBackground();
+    }
+    function prevClick() {
+        slide.classList.remove(`slide${count % totalSlides + 1}`);
+        count--;
+        if (count < 0) count = totalSlides - 1;
+        slide.classList.add(`slide${count % totalSlides + 1}`);
+        updateListBackground();
+    }
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextClick, 3000);
+    }
+    function resetAutoPlayInterval() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+    next.addEventListener('click', () => {
+        nextClick();
+        resetAutoPlayInterval();
+    });
+    prev.addEventListener('click', () => {
+        prevClick();
+        resetAutoPlayInterval();
+    });
+    indicator.addEventListener('click', (event) => {
+        if (event.target.classList.contains('list')) {
+            const index = Array.from(lists).indexOf(event.target);
+            slide.classList.remove(`slide${count % totalSlides + 1}`);
+            count = index;
+            slide.classList.add(`slide${count % totalSlides + 1}`);
+            updateListBackground();
+            resetAutoPlayInterval();
+        }
+    });
+    startAutoPlay();
+</script>
+
+</html>

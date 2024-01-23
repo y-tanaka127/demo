@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <title>メンバー紹介</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+            background-color: rgb(230, 250, 249);
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        img.logo {
+            padding: 0.5em;
+            height: 3em;
+        }
+
+        i {
+            width: 1em;
+            margin-right: 0.5em;
+        }
+
+        header {
+            background-color: #FFFFFF;
+            color: black;
+            border-bottom: 2px solid rgb(255, 2, 2);
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                display: flex;
+
+                h1 {
+                    padding: 0.5rem;
+                }
+            }
+        }
+
+        div.container {
+            height: calc(100% - 3.5em);
+            width: 100%;
+            display: flex;
+        }
+
+        main {
+            height: calc(100% - 3em);
+            /*width: calc(100% - 12.5em);*/
+            width: 100%;
+        }
+
+
+        div.card {
+            margin: 0.5em;
+            padding: 0.5em;
+            border-radius: 20px;
+            border: 1px gray solid;
+            background-color: white;
+
+            div.title {
+                font-size: 1.2em;
+                font-weight: bold;
+                width: 100%;
+                border-bottom: 3px solid lightblue;
+                margin-bottom: 0.5em;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                div {
+                    width: auto;
+                }
+
+                button {
+                    background-color: lightblue;
+                    padding: 0.2em;
+                    font-weight: bold;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        div.card-skin {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+        }
+
+        div.pick-up {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            div.member {}
+        }
+
+        div.recommendation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            margin: 0 auto;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            div.member {}
+        }
+
+        div {
+            p.note {
+                font-size: 1.2em;
+                font-weight: bold;
+                margin: 0.5em;
+            }
+        }
+
+        div.top,
+        div.bottom {
+            position: relative;
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        div.top:before {
+            content: '';
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            width: 85%;
+            transform: translateX(-50%);
+            border-bottom: 1px solid black;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* 半透明の黒色 */
+            z-index: 500;
+            /* モーダルウィンドウよりも前面に表示 */
+        }
+
+        dialog[open] {
+            border: 1px black solid;
+            position: fixed;
+            inset: 0;
+            margin: auto;
+            z-index: 1000;
+            padding: 0.5em;
+            display: flex;
+
+            div.left {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-right: 1em;
+
+                img {
+                    margin: 0.5em;
+                    height: 15em;
+                    width: 15em;
+                }
+
+                button {
+                    display: block;
+                    border-radius: 10px;
+                    background-color: lightblue;
+                    padding: 0.2em;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                    margin: 0.5em;
+                }
+            }
+
+            div.right {
+                width: 30em;
+            }
+
+            dt {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+            dd {
+                font-size: 1.2em;
+            }
+
+        }
+    </style>
+    <script>
+        const showModal = () => {
+            let modal = document.querySelector('dialog');
+            let overlay = document.querySelector('div.overlay');
+            modal.show();
+            overlay.style.display = 'flex';
+        }
+        const closeModal = () => {
+            let modal = document.querySelector('dialog');
+            let overlay = document.querySelector('div.overlay');
+            modal.close();
+            overlay.style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img class="logo" src="./logo.png" />
+            <h1>エームサービス株式会社</h1>
+        </div>
+        <div>
+            <h1>≡</h1>
+        </div>
+    </header>
+    <div class="container">
+        <main>
+            <div class="top">
+                <p class="note">今週のピックアップ人材</p>
+                <div class="pick-up">
+                    <div class="member card card-skin" onclick="showModal()">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <p class="note">あなたへのおすすめ</p>
+                <details>
+                    <summary>
+                        詳しく絞り込む
+                    </summary>
+                    検索
+                </details>
+                <div class="recommendation">
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                    <div class="member card card-skin">
+                        <img src="./" />
+                        <p>ここに説明文</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="overlay" onclick="closeModal()"></div>
+        <dialog>
+            <div class="left">
+                <img src="./" />
+                <button type="button">連絡を取る</button>
+                <button type="button">目標にする</button>
+            </div>
+            <div class="right">
+                <dl>
+                    <dt>名前</dt>
+                    <dd>田中 太郎</dd>
+                    <dt>所属</dt>
+                    <dd>東京事業所</dd>
+                    <dt>役職</dt>
+                    <dd>マネージャ</dd>
+                    <dt>趣味</dt>
+                    <dd></dd>
+                    <dt>業務</dt>
+                    <dd></dd>
+                </dl>
+            </div>
+        </dialog>
+    </div>
+</body>
+<script>
+    const slide = document.getElementById('slide');
+    const lists = document.querySelectorAll('.list');
+    const totalSlides = lists.length;
+    const prev = document.getElementById('prev');
+    const indicator = document.getElementById('indicator');
+    const next = document.getElementById('next');
+    let count = 0;
+    let autoPlayInterval;
+    function updateListBackground() {
+        for (let i = 0; i < lists.length; i++) {
+            lists[i].style.backgroundColor = i === count % totalSlides ? '#000' : '#fff';
+        }
+    }
+    function nextClick() {
+        slide.classList.remove(`slide${count % totalSlides + 1}`);
+        count++;
+        slide.classList.add(`slide${count % totalSlides + 1}`);
+        updateListBackground();
+    }
+    function prevClick() {
+        slide.classList.remove(`slide${count % totalSlides + 1}`);
+        count--;
+        if (count < 0) count = totalSlides - 1;
+        slide.classList.add(`slide${count % totalSlides + 1}`);
+        updateListBackground();
+    }
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextClick, 3000);
+    }
+    function resetAutoPlayInterval() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+    next.addEventListener('click', () => {
+        nextClick();
+        resetAutoPlayInterval();
+    });
+    prev.addEventListener('click', () => {
+        prevClick();
+        resetAutoPlayInterval();
+    });
+    indicator.addEventListener('click', (event) => {
+        if (event.target.classList.contains('list')) {
+            const index = Array.from(lists).indexOf(event.target);
+            slide.classList.remove(`slide${count % totalSlides + 1}`);
+            count = index;
+            slide.classList.add(`slide${count % totalSlides + 1}`);
+            updateListBackground();
+            resetAutoPlayInterval();
+        }
+    });
+    startAutoPlay();
+</script>
+
+</html>
