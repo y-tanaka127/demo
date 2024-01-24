@@ -6,7 +6,7 @@
     <scrit src="https://cdn.jsdelivr.net/npm/chart.js">
         </script>
         <meta charset="UTF-8" />
-        <title>メンバー紹介</title>
+        <title>社内ポータル - メンバー紹介</title>
         <style>
             * {
                 margin: 0;
@@ -216,6 +216,11 @@
 
                 dd {
                     font-size: 1.2em;
+                    margin-bottom: 0.5em;
+                }
+
+                dd::before {
+                    content: '　';
                 }
 
             }
@@ -312,6 +317,10 @@
             input[type="checkbox"]:checked~.nav {
                 right: 0;
             }
+
+            div.member p {
+                font-weight: bold;
+            }
         </style>
 </head>
 <script>
@@ -333,7 +342,7 @@
     <header>
         <div>
             <img class="logo" src="./illust/logo.png" />
-            <h1>エームサービス株式会社</h1>
+            <h1>社内ポータル - メンバー紹介</h1>
         </div>
         <div>
             <div>
@@ -345,8 +354,8 @@
                     <ul class="nav__list">
                         <li class="nav__item"><a href="/demo/mypage.html">マイページ</a></li>
                         <li class="nav__item"><a href="/demo/member.html">メンバー紹介</a></li>
-                        <li class="nav__item"><a href="#">事業所紹介</a></li>
-                        <li class="nav__item"><a href="#">相談窓口</a></li>
+                        <li class="nav__item"><a href="/demo/office.html">事業所紹介</a></li>
+                        <li class="nav__item"><a href="/demo/consultation.html">相談窓口</a></li>
                     </ul>
                 </nav>
             </div>
@@ -360,15 +369,15 @@
                 <div class="pick-up">
                     <div class="member card card-skin" onclick="showModal()">
                         <img src="./illust/サラリーマン_普通.png" />
-                        <p>ここに説明文</p>
+                        <p>田中 太郎</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_眼鏡.png" />
-                        <p>ここに説明文</p>
+                        <p>鈴木 かおり</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_イケおじ.png" />
-                        <p>ここに説明文</p>
+                        <p>佐藤 健太</p>
                     </div>
                 </div>
             </div>
@@ -383,43 +392,43 @@
                 <div class="recommendation">
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_体育会系.png" />
-                        <p>ここに説明文</p>
+                        <p>伊藤 慎太郎</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_眼鏡.png" />
-                        <p>ここに説明文</p>
+                        <p>中村 圭太</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_普通.png" />
-                        <p>ここに説明文</p>
+                        <p>佐藤 美咲</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_さわやか.png" />
-                        <p>ここに説明文</p>
+                        <p>吉田 琢磨</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_おじいさん.png" />
-                        <p>ここに説明文</p>
+                        <p>佐々木 慎吾</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_おばあさん.png" />
-                        <p>ここに説明文</p>
+                        <p>伊藤 綾子</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_おだやかおばあさん.png" />
-                        <p>ここに説明文</p>
+                        <p>中村 真理子</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_元気おばさん.png" />
-                        <p>ここに説明文</p>
+                        <p>吉田 仁美</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/サラリーマン_おだやかおじさん.png" />
-                        <p>ここに説明文</p>
+                        <p>山田 進</p>
                     </div>
                     <div class="member card card-skin">
                         <img src="./illust/OL_小太り.png" />
-                        <p>ここに説明文</p>
+                        <p>小林 里香</p>
                     </div>
                 </div>
             </div>

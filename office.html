@@ -5,7 +5,7 @@
     <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
-    <title>マイページ</title>
+    <title>事業所紹介</title>
     <style>
         * {
             margin: 0;
@@ -72,7 +72,6 @@
             width: 100%;
 
             div {
-                width: 100%;
                 box-sizing: inherit;
             }
         }
@@ -390,6 +389,17 @@
         input[type="checkbox"]:checked~.nav {
             right: 0;
         }
+
+        div.office-list {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+
+            div.office {
+                width: calc((100% / 2) - 2.5em);
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -397,7 +407,7 @@
     <header>
         <div>
             <img class="logo" src="./illust/logo.png" />
-            <h1>社内ポータル - マイページ</h1>
+            <h1>社内ポータル - 事業所紹介</h1>
         </div>
         <div>
             <input type="checkbox" id="check">
@@ -447,132 +457,71 @@
                 </div>
             </div>
             <div>
-                <div class="top">
-                    <div class="card card-skin left">
-                        <div style="height: 30em;width: 30em;">
-                            <canvas id="myRadarChart" height="10em" width="10em" style="height: 160px"></canvas>
-                            <script>
-                                let ctx = document.getElementById('myRadarChart');
-                                let myChart = new Chart(ctx, {
-                                    type: 'radar',
-                                    data: {
-                                        labels: ["1", "2", "3", "4", "5"],
-                                        datasets: [
-                                            {
-                                                label: "現在",
-                                                data: [25, 21, 38, 28, 20],
-                                                backgroundColor: "rgba(67, 133, 215, 0.5)",
-                                                borderColor: "rgba(67, 133, 215, 1)",
-                                            },
-                                            {
-                                                label: "将来",
-                                                data: [40, 38, 47, 42, 35],
-                                                backgroundColor: "rgba(214, 91, 91, 0.5)",
-                                                borderColor: "rgba(214, 91, 91, 1)",
-                                            }
-                                        ]
-                                    },
-                                    options: {
-                                        scales: {
-                                            r: {
-                                                max: 50,
-                                                min: 0,
-                                                ticks: {
-                                                    stepSize: 5,
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
-                            </script>
-                        </div>
+                <p>北海道・東北</p>
+                <div class="office-list">
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>北海道札幌市</p>
                     </div>
-                    <div class="right">
-                        <div class="card card-skin future">
-                            <div class="title">
-                                <p>将来</p>
-                            </div>
-                            <ul>
-                                <li>ここに将来の目標像を書く</li>
-                                <li>食品衛生責任者の資格取得</li>
-                            </ul>
-                        </div>
-                        <div class="card card-skin now">
-                            <div class="title">
-                                <p>現在</p>
-                            </div>
-                            <ul>
-                                <li>ここに現在のスキルなどを書く</li>
-                            </ul>
-                        </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>宮城県仙台市</p>
                     </div>
                 </div>
-                <div class="bottom">
-                    <div class="card card-skin left">
-                        <div class="title">
-                            <p>研修履歴</p>
-                            <div>
-                                <button type="button">予約</button>
-                            </div>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>研修名</th>
-                                    <th>日時</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td>新人研修</td>
-                                    <td>2023年4月3日</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td>ビジネスマナー研修</td>
-                                    <td>2023年4月5日</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td>マネジメント研修</td>
-                                    <td>2023年4月7日</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <p>関東</p>
+                <div class="office-list">
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>東京都中央区</p>
                     </div>
-                    <div class="card card-skin right">
-                        <div class="title">
-                            <p>面談</p>
-                            <div>
-                                <button type="button">予約</button>
-                            </div>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>面談名</th>
-                                    <th>相手</th>
-                                    <th>場所</th>
-                                    <th>日時</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>相談</td>
-                                    <td>高橋マネージャ</td>
-                                    <td>会議室（中）</td>
-                                    <td>2024年1月14日</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>東京都新宿区</p>
+                    </div>
+                </div>
+                <p>中部・東海</p>
+                <div class="office-list">
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>静岡県浜松市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>愛知県名古屋市</p>
+                    </div>
+                </div>
+                <p>関西</p>
+                <div class="office-list">
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>京都府京都市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>大阪府大阪市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>大阪府東大阪市</p>
+                    </div>
+                </div>
+                <p>中国・四国・九州</p>
+                <div class="office-list">
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>岡山県岡山市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>香川県高松市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>福岡県福岡市</p>
+                    </div>
+                    <div class="office card card-skin">
+                        <img src="./illust/" />
+                        <p>熊本県熊本市</p>
                     </div>
                 </div>
             </div>
