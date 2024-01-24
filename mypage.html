@@ -16,7 +16,9 @@
         body {
             width: 100%;
             overflow-y: scroll;
-            background-color: rgb(230, 250, 249);
+            /*background-color: rgb(230, 250, 249);*/
+            background-color: whitesmoke;
+
         }
 
         body::-webkit-scrollbar {
@@ -25,7 +27,7 @@
 
         img.logo {
             padding: 0.5em;
-            height: 3em;
+            height: 2em;
         }
 
         i {
@@ -39,33 +41,29 @@
             border-bottom: 2px solid rgb(255, 2, 2);
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
 
             div {
                 display: flex;
 
                 h1 {
+                    font-size: 1.2em;
                     padding: 0.5rem;
                 }
             }
+        }
+
+        div.dummy-header {
+            height: calc(3em + 1px);
         }
 
         div.container {
             height: calc(100% - 3.5em);
             width: 100%;
             display: flex;
-        }
-
-        nav {
-            height: 100%;
-            background-color: #F3EDED;
-            width: 10em;
-            border: 1px whitesmoke solid;
-
-            ul {
-                li {
-                    padding: 0.5rem;
-                }
-            }
         }
 
         main {
@@ -299,29 +297,125 @@
         .indicator li:first-of-type {
             background-color: #000;
         }
+
+        /* ===============================================
+        ハンバーガーボタンのスタイリング
+        =============================================== */
+        input[type="checkbox"] {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        div:has(label.hamburger) {
+            margin-right: 1em;
+        }
+
+        .hamburger {
+            display: block;
+            width: 2em;
+            height: 2em;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .hamburger span,
+        .hamburger span::before,
+        .hamburger span::after {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transition: all 0.5s;
+        }
+
+        .hamburger span::before {
+            top: -10px;
+        }
+
+        .hamburger span::after {
+            bottom: -10px;
+        }
+
+        input[type="checkbox"]:checked+.hamburger span {
+            background-color: transparent;
+        }
+
+        input[type="checkbox"]:checked+.hamburger span::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        input[type="checkbox"]:checked+.hamburger span::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+
+        /* ===============================================
+        メニューのスタイリング
+        =============================================== */
+        .nav {
+            position: fixed;
+            width: 15em;
+            height: 100vh;
+            top: 3em;
+            right: -120%;
+            background-color: #2e353c;
+            color: white;
+            padding: 50px 0;
+            transition: all 0.5s;
+            z-index: 9999;
+            border-left: 1px solid red;
+            border-top: 1px solid red;
+        }
+
+        .nav__item a {
+            display: block;
+            font-size: 1em;
+            padding: 20px 0 20px 50px;
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .nav__item a:hover {
+            color: black;
+            background-color: lightgray;
+        }
+
+        input[type="checkbox"]:checked~.nav {
+            right: 0;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <div>
-            <img class="logo" src="./logo.png" />
-            <h1>エームサービス株式会社</h1>
+            <img class="logo" src="./illust/logo.png" />
+            <h1>社内ポータル - マイページ</h1>
         </div>
         <div>
-            <h1>≡</h1>
+            <input type="checkbox" id="check">
+            <label for="check" class="hamburger">
+                <span></span>
+            </label>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="/demo/mypage.html">マイページ</a></li>
+                    <li class="nav__item"><a href="/demo/member.html">メンバー紹介</a></li>
+                    <li class="nav__item"><a href="#">事業所紹介</a></li>
+                    <li class="nav__item"><a href="#">相談窓口</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+    <div class="dummy-header"></div>
     <div class="container">
-        <!--
-		<nav>
-			<ul>
-				<li><a href="#"><i class="fa-solid fa-person"></i>マイページ</a></li>
-				<li><a href="#"><i class="fa-solid fa-building"></i>事業所</a></li>
-				<li><a href="#"><i class="fa-solid fa-comment-dots"></i>チャット</a></li>
-			</ul>
-		</nav>
-		-->
         <main>
             <div class="slideshow">
                 <!-- スライドの外枠 -->
