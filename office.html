@@ -5,7 +5,7 @@
     <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
-    <title>事業所紹介</title>
+    <title>事務所紹介</title>
     <style>
         * {
             margin: 0;
@@ -410,6 +410,23 @@
                 }
             }
         }
+
+        @media only screen and (max-width:787px) {
+
+            div.office-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                div.office {
+                    box-sizing: content-box;
+                    width: auto;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
     </style>
 </head>
 
@@ -417,7 +434,7 @@
     <header>
         <div>
             <img class="logo" src="./illust/logo.png" />
-            <h1>社内ポータル - 事業所紹介</h1>
+            <h1>社内ポータル - 事務所紹介</h1>
         </div>
         <div>
             <input type="checkbox" id="check">
@@ -426,10 +443,10 @@
             </label>
             <nav class="nav">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="/demo/mypage.html">マイページ</a></li>
-                    <li class="nav__item"><a href="/demo/member.html">メンバー紹介</a></li>
-                    <li class="nav__item"><a href="/demo/office.html">事業所紹介</a></li>
-                    <li class="nav__item"><a href="/demo/consultation.html">相談窓口</a></li>
+                    <li class="nav__item"><a href="./mypage.html">マイページ</a></li>
+                    <li class="nav__item"><a href="./member.html">メンバー紹介</a></li>
+                    <li class="nav__item"><a href="./office.html">事務所紹介</a></li>
+                    <li class="nav__item"><a href="./consultation.html">相談窓口</a></li>
                 </ul>
             </nav>
         </div>
@@ -444,15 +461,15 @@
                     <div id="slide" class="slide">
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事業所の紹介①</p>
+                            <p>事務所の紹介①</p>
                         </div>
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事業所の紹介②</p>
+                            <p>事務所の紹介②</p>
                         </div>
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事業所の紹介③</p>
+                            <p>事務所の紹介③</p>
                         </div>
                     </div>
                     <!-- 左右のボタン -->

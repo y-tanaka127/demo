@@ -326,6 +326,22 @@
             li {
                 list-style: none;
             }
+
+            @media only screen and (max-width:787px) {
+                div.top {
+                    div.pick-up {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+
+                div.bottom {
+                    div.recommendation {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
+                }
+            }
         </style>
 </head>
 <script>
@@ -357,10 +373,10 @@
                 </label>
                 <nav class="nav">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="/demo/mypage.html">マイページ</a></li>
-                        <li class="nav__item"><a href="/demo/member.html">メンバー紹介</a></li>
-                        <li class="nav__item"><a href="/demo/office.html">事業所紹介</a></li>
-                        <li class="nav__item"><a href="/demo/consultation.html">相談窓口</a></li>
+                        <li class="nav__item"><a href="./mypage.html">マイページ</a></li>
+                        <li class="nav__item"><a href="./member.html">メンバー紹介</a></li>
+                        <li class="nav__item"><a href="./office.html">事務所紹介</a></li>
+                        <li class="nav__item"><a href="./consultation.html">相談窓口</a></li>
                     </ul>
                 </nav>
             </div>
@@ -450,7 +466,7 @@
                     <dt>名前</dt>
                     <dd>田中 太郎</dd>
                     <dt>所属</dt>
-                    <dd>東京事業所</dd>
+                    <dd>東京事務所</dd>
                     <dt>役職</dt>
                     <dd>マネージャ</dd>
                     <dt>趣味</dt>
