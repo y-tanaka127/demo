@@ -187,23 +187,28 @@
 
                 div.left {
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
                     margin-right: 1em;
 
                     img {
                         margin: 0.5em;
-                        height: 10em;
+                        height: 15em;
+                        width: 15em;
                     }
 
                     button {
                         display: block;
-                        border-radius: 10px;
                         background-color: lightblue;
                         padding: 0.2em;
                         font-weight: bold;
                         font-size: 1.2em;
                         margin: 0.5em;
                     }
+                }
+
+                div.right {
+                    width: 30em;
                 }
 
                 dt {
@@ -350,18 +355,18 @@
 
                     div.left {
                         display: flex;
+                        flex-direction: row;
                         align-items: center;
                         margin-right: 1em;
 
                         img {
                             margin: 0.5em;
-                            height: 15em;
-                            width: em;
+                            height: 10em;
+                            width: 10em;
                         }
 
                         button {
                             display: block;
-                            border-radius: 10px;
                             background-color: lightblue;
                             padding: 0.2em;
                             font-weight: bold;
@@ -374,14 +379,32 @@
                         width: 100%;
                     }
 
+                    dl {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                    }
+
+                    dd,
+                    dt {
+                        border: 1px black solid;
+                    }
+
                     dt {
                         font-weight: bold;
-                        text-decoration: underline;
+                        text-decoration: none;
+                        width: 20%;
+                        background-color: lightblue;
+                        color: black;
+                        display: inherit;
+                        justify-content: center;
+                        align-items: center;
                     }
 
                     dd {
-                        font-size: 1.2em;
-                        margin-bottom: 0.5em;
+                        font-size: 1em;
+                        width: 75%;
+                        margin: 0;
                     }
 
                     dd::before {
@@ -531,11 +554,12 @@
                     <dt>所属</dt>
                     <dd>東京事務所</dd>
                     <dt>役職</dt>
-                    <dd>マネージャ</dd>
+                    <dd>エリアマネージャ</dd>
                     <dt>趣味</dt>
-                    <dd></dd>
+                    <dd>野球観戦</dd>
                     <dt>業務</dt>
-                    <dd></dd>
+                    <dd>・〇〇区の店舗の管理、運営<br />　・スタッフ教育
+                    </dd>
                 </dl>
             </div>
         </dialog>
