@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
+    <scrit src="https://cdn.jsdelivr.net/npm/chart.js">
+        </script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width">
+        <title>社内ポータル - 設定</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow-y: scroll;
+                /*background-color: rgb(230, 250, 249);*/
+                background-color: whitesmoke;
+            }
+
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
+            img.logo {
+                padding: 0.5em;
+                height: 2em;
+            }
+
+            i {
+                width: 1em;
+                margin-right: 0.5em;
+            }
+
+            header {
+                background-color: #FFFFFF;
+                color: black;
+                border-bottom: 2px solid rgb(255, 2, 2);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 500;
+
+                div {
+                    display: flex;
+
+                    h1 {
+                        padding: 0.5rem;
+                        font-size: 1.2em;
+                    }
+                }
+            }
+
+            div.container {
+                height: calc(100% - 3.5em);
+                width: 100%;
+                display: flex;
+            }
+
+            main {
+                /*height: calc(100% - 3em);*/
+                /*width: calc(100% - 12.5em);*/
+                width: 100%;
+            }
+
+            div.dummy-header {
+                height: calc(3em + 1px);
+            }
+
+            div.card {
+                margin: 0.5em;
+                padding: 0.5em;
+                border-radius: 20px;
+                border: 1px gray solid;
+                background-color: white;
+                position: relative;
+
+                img {
+                    box-sizing: content-box;
+                    width: 75%;
+                }
+
+                div.title {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    width: 100%;
+                    border-bottom: 3px solid lightblue;
+                    margin-bottom: 0.5em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    div {
+                        width: auto;
+                    }
+                }
+            }
+
+            div.card:hover,
+            button:hover {
+                cursor: pointer;
+            }
+
+            div.card-skin {
+                overflow: hidden;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            }
+
+            div.pick-up {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+
+            div.recommendation {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                margin: 0 auto;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+
+            div {
+                p.note {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    margin: 0.5em;
+                }
+            }
+
+            div.top,
+            div.bottom {
+                position: relative;
+                text-align: center;
+                margin: 3em auto;
+            }
+
+            div.top:before {
+                content: '';
+                position: absolute;
+                top: 110%;
+                left: 50%;
+                width: 85%;
+                transform: translateX(-50%);
+                border-bottom: 1px solid black;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+                /* 半透明の黒色 */
+                z-index: 700;
+                /* モーダルウィンドウよりも前面に表示 */
+            }
+
+            dialog[open] {
+                border: 1px black solid;
+                position: fixed;
+                inset: 0;
+                margin: auto;
+                z-index: 1000;
+                padding: 0.5em;
+                display: flex;
+
+                div.left {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-right: 1em;
+
+                    img {
+                        margin: 0.5em;
+                        height: 15em;
+                        width: 15em;
+                    }
+
+                    button {
+                        display: block;
+                        background-color: lightblue;
+                        padding: 0.2em;
+                        font-weight: bold;
+                        font-size: 1.2em;
+                        margin: 0.5em;
+                    }
+                }
+
+                div.right {
+                    width: 30em;
+                }
+
+                dt {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+
+                dd {
+                    font-size: 1.2em;
+                    margin-bottom: 0.5em;
+                }
+
+                dd::before {
+                    content: '　';
+                }
+
+            }
+
+            /* ===============================================
+        ハンバーガーボタンのスタイリング
+        =============================================== */
+            input[type="checkbox"] {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+            }
+
+            div:has(label.hamburger) {
+                margin-right: 1em;
+            }
+
+            .hamburger {
+                display: block;
+                width: 2em;
+                height: 2em;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .hamburger span,
+            .hamburger span::before,
+            .hamburger span::after {
+                position: absolute;
+                display: block;
+                content: "";
+                width: 100%;
+                height: 2px;
+                background-color: black;
+                transition: all 0.5s;
+            }
+
+            .hamburger span::before {
+                top: -10px;
+            }
+
+            .hamburger span::after {
+                bottom: -10px;
+            }
+
+            input[type="checkbox"]:checked+.hamburger span {
+                background-color: transparent;
+            }
+
+            input[type="checkbox"]:checked+.hamburger span::before {
+                top: 0;
+                transform: rotate(45deg);
+            }
+
+            input[type="checkbox"]:checked+.hamburger span::after {
+                bottom: 0;
+                transform: rotate(-45deg);
+            }
+
+            /* ===============================================
+        メニューのスタイリング
+        =============================================== */
+            .nav {
+                position: fixed;
+                width: 15em;
+                height: 100vh;
+                top: 3em;
+                right: -120%;
+                background-color: #2e353c;
+                color: white;
+                padding: 50px 0;
+                transition: all 0.5s;
+                z-index: 9999;
+                border-left: 1px solid red;
+                border-top: 1px solid red;
+            }
+
+            .nav__item a {
+                display: block;
+                font-size: 1em;
+                padding: 20px 0 20px 50px;
+                text-transform: uppercase;
+                color: white;
+            }
+
+            .nav__item a:hover {
+                color: black;
+                background-color: lightgray;
+            }
+
+            input[type="checkbox"]:checked~.nav {
+                right: 0;
+            }
+
+            div.member p {
+                font-weight: bold;
+            }
+
+            li {
+                list-style: none;
+            }
+
+            @media only screen and (max-width:787px) {
+                div.top {
+                    div.pick-up {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+
+                div.bottom {
+                    div.recommendation {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
+                }
+
+                dialog[open] {
+                    border: 1px black solid;
+                    position: fixed;
+                    inset: 0;
+                    margin: auto;
+                    z-index: 1000;
+                    padding: 0.5em;
+                    display: flex;
+                    flex-direction: column;
+
+                    div.left {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        margin-right: 1em;
+
+                        img {
+                            margin: 0.5em;
+                            height: 10em;
+                            width: 10em;
+                        }
+
+                        button {
+                            display: block;
+                            background-color: lightblue;
+                            padding: 0.2em;
+                            font-weight: bold;
+                            font-size: 1.2em;
+                            margin: 0.5em;
+                        }
+                    }
+
+                    div.right {
+                        width: 100%;
+                    }
+
+                    dl {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                    }
+
+                    dd,
+                    dt {
+                        border: 1px black solid;
+                    }
+
+                    dt {
+                        font-weight: bold;
+                        text-decoration: none;
+                        width: 20%;
+                        background-color: lightblue;
+                        color: black;
+                        display: inherit;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    dd {
+                        font-size: 1em;
+                        width: 75%;
+                        margin: 0;
+                    }
+
+                    dd::before {
+                        content: '　';
+                    }
+
+                }
+            }
+        </style>
+</head>
+<script>
+    const showModal = () => {
+        let modal = document.querySelector('dialog');
+        let overlay = document.querySelector('.overlay');
+        modal.show();
+        overlay.style.display = 'flex';
+    }
+    const closeModal = () => {
+        let modal = document.querySelector('dialog');
+        let overlay = document.querySelector('.overlay');
+        modal.close();
+        overlay.style.display = 'none';
+    }
+</script>
+
+<body>
+    <header>
+        <div>
+            <img class="logo" src="./illust/logo.png" />
+            <h1>社内ポータル - メンバー紹介</h1>
+        </div>
+        <div>
+            <div>
+                <input type="checkbox" id="check">
+                <label for="check" class="hamburger">
+                    <span></span>
+                </label>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="./mypage.html">マイページ</a></li>
+                        <li class="nav__item"><a href="./member.html">メンバー紹介</a></li>
+                        <li class="nav__item"><a href="./office.html">事務所紹介</a></li>
+                        <li class="nav__item"><a href="./consultation.html">相談窓口</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="dummy-header"></div>
+    <div class="container">
+        <main>
+
+        </main>
+    </div>
+</body>
+
+</html>

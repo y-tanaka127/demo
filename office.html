@@ -45,6 +45,7 @@
             position: fixed;
             top: 0;
             width: 100%;
+            z-index: calc(infinity);
 
             div {
                 display: flex;
@@ -426,6 +427,54 @@
                     }
                 }
             }
+
+            div.search {
+                div.tag-list {
+                    div.tag-group {
+                        display: flex;
+                        flex-direction: column;
+                        border: 2px black solid;
+
+                        p.title {
+                            border-bottom: 2px black solid;
+                            background-color: lightblue;
+                            font-weight: bold;
+                        }
+
+                        div {
+                            position: relative;
+                            margin: 0.2em;
+
+                            input[type="checkbox"]+label::before {
+                                border: 1px solid black;
+                                content: '　';
+                                display: inline-block;
+                                width: 1em;
+                                height: 1em;
+                                position: absolute;
+                                top: 10%
+                            }
+
+                            input[type="checkbox"]:checked+label::after {
+                                content: '✓';
+                                position: absolute;
+                                font-size: 1.5em;
+                                left: 0;
+                                top: -30%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            button {
+                background-color: lightblue;
+                padding: 0.2em 1em;
+                font-weight: bold;
+                /* border: none; */
+                /* border-left: 3px black solid; */
+                margin: 0.2em;
+            }
         }
     </style>
 </head>
@@ -482,6 +531,67 @@
                         <li class="list"></li>
                     </ul>
                 </div>
+            </div>
+            <div class="card card-skin search">
+                <details>
+                    <summary>あいまい検索</summary>
+                    <div class="tag-list">
+                        <div class="tag-group">
+                            <p class="title">ジャンル</p>
+                            <div>
+                                <div>
+                                    <input type="checkbox" id="05" hidden />
+                                    <label for="05">　 社員食堂・寮</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="06" hidden />
+                                    <label for="06">　 病院・高齢者施設</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="07" hidden />
+                                    <label for="07">　 学生食堂</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="08" hidden />
+                                    <label for="08">　 エンターテインメント施設</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="09" hidden />
+                                    <label for="09">　 スポーツ施設</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tag-group">
+                            <p class="title">雰囲気</p>
+                            <div>
+                                <div>
+                                    <input type="checkbox" id="01" hidden />
+                                    <label for="01">　 にぎやか</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="02" hidden />
+                                    <label for="02">　 少数精鋭</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tag-group">
+                            <p class="title">その他</p>
+                            <div>
+                                <div>
+                                    <input type="checkbox" id="03" hidden />
+                                    <label for="03">　 通常業務</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="04" hidden />
+                                    <label for="04">　 業務以外</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: end; width: 100%;">
+                        <button type="button">検索</button>
+                    </div>
+                </details>
             </div>
             <div class="office-box">
                 <p class="area-name">北海道・東北</p>
