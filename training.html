@@ -379,39 +379,53 @@
                         width: 100%;
                     }
 
-                    dl {
-                        display: flex;
-                        flex-wrap: wrap;
-                        width: 100%;
-                    }
-
-                    dd,
-                    dt {
-                        border: 1px black solid;
-                    }
-
-                    dt {
-                        font-weight: bold;
-                        text-decoration: none;
-                        width: 20%;
-                        background-color: lightblue;
-                        color: black;
-                        display: inherit;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    dd {
-                        font-size: 1em;
-                        width: 75%;
-                        margin: 0;
-                    }
-
-                    dd::before {
-                        content: '　';
-                    }
-
                 }
+
+                th,
+                td {
+                    font-size: 0.9em;
+                }
+            }
+
+            table,
+            th,
+            td {
+                border: 1px black solid;
+                border-collapse: collapse;
+                overflow-wrap: anywhere;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            th {
+                background-color: lightblue;
+            }
+
+            td {
+                background-color: white;
+                padding: 0.5em;
+            }
+
+            div:has(p.name-title) {
+                .name-title {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    padding: 0.5em;
+                    border-bottom: 3px lightblue solid;
+                    margin-bottom: 0.5em;
+                }
+            }
+
+            button {
+                background-color: lightblue;
+                padding: 0.2em;
+                font-weight: bold;
+            }
+
+            i.small {
+                font-size: 0.7em;
             }
         </style>
 </head>
@@ -456,27 +470,56 @@
     <div class="dummy-header"></div>
     <div class="container">
         <main>
-            <div>
-                <p>〇〇さんの研修履歴</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>研修名</th>
-                            <th>日時</th>
-                            <th>状況</th>
-                            <th>資料</th>
-                        </tr>
-                        <tr>
-                            <td>新人研修</td>
-                            <td>2023年4月3日</td>
-                            <td>済</td>
-                            <td>
-                                <a href="#">新人研修資料.pdf</a>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="card">
+                <div>
+                    <p class="name-title">〇〇さんの研修履歴</p>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>研修名</th>
+                                <th>日時</th>
+                                <th>状況</th>
+                                <th>資料/リンク</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>食品衛生研修</td>
+                                <td>2023年8月20日</td>
+                                <td>済</td>
+                                <td style="text-align: center;">
+                                    <a href="#">食品衛生研修<i class="fa-solid fa-link small"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>マネジメント研修</td>
+                                <td>2023年4月7日</td>
+                                <td>済</td>
+                                <td style="text-align: center;">
+                                    <a href="#">マネジメント研修<i class="fa-solid fa-link small"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>新人研修</td>
+                                <td>2023年4月3日</td>
+                                <td>済</td>
+                                <td style="text-align: center;">
+                                    <button type="button">資料DL<i class="fa-solid fa-download"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ビジネスマナー研修</td>
+                                <td>2023年4月5日</td>
+                                <td>済</td>
+                                <td style="text-align: center;">
+                                    <button type="button">資料DL<i class="fa-solid fa-download"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>

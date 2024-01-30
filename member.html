@@ -413,6 +413,39 @@
 
                 }
             }
+
+            dl {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            dd,
+            dt {
+                border: 1px black solid;
+                margin: 0;
+            }
+
+            dt {
+                font-weight: bold;
+                text-decoration: none;
+                width: 20%;
+                background-color: lightblue;
+                color: black;
+                display: inherit;
+                justify-content: center;
+                align-items: center;
+            }
+
+            dd {
+                font-size: 1em;
+                width: 75%;
+                margin: 0;
+            }
+
+            dd::before {
+                content: '　';
+            }
         </style>
 </head>
 <script>

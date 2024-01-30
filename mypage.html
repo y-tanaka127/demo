@@ -18,7 +18,6 @@
             overflow-y: scroll;
             /*background-color: rgb(230, 250, 249);*/
             background-color: whitesmoke;
-
         }
 
         body::-webkit-scrollbar {
@@ -63,7 +62,6 @@
         div.container {
             height: calc(100% - 3.5em);
             width: 100%;
-            display: flex;
         }
 
         main {
@@ -179,9 +177,6 @@
             width: 100%;
         }
 
-        li {
-            list-style: none;
-        }
 
         /* ↓ スライドの外枠 */
         .slide-wrapper {
@@ -381,6 +376,12 @@
             color: white;
         }
 
+        .nav {
+            li {
+                list-style: none;
+            }
+        }
+
         .nav__item a:hover {
             color: black;
             background-color: lightgray;
@@ -432,6 +433,28 @@
                 }
             }
         }
+
+        footer {
+            border-top: 1px red solid;
+            background-color: white;
+
+            div {
+                p.title {
+                    font-size: 1.0em;
+                    font-weight: bold;
+                    margin: 0.5em 0 0 0.5em;
+                }
+            }
+
+            ul {
+                padding-left: 1em;
+
+                li {
+                    list-style: none;
+                    font-size: 0.8em;
+                }
+            }
+        }
     </style>
 </head>
 
@@ -442,6 +465,11 @@
             <h1>社内ポータル - マイページ</h1>
         </div>
         <div>
+            <div style="margin-right: 1em;">
+                <button class="button" style="background-color: coral;" onclick="openHowToUse()">
+                    使い方
+                </button>
+            </div>
             <input type="checkbox" id="check">
             <label for="check" class="hamburger">
                 <span></span>
@@ -550,14 +578,14 @@
                                     </div>
                                 </div>
                                 <ul>
-                                    <li>ここに将来の目標像を書く</li>
+                                    <li>ここに将来の目標像を記述</li>
                                     <!-- <li>食品衛生責任者の資格取得</li> -->
                                 </ul>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <input type="text" style="width: calc(100% - 3em); line-height: 1.5em;" />
                                 <input type="button" style="width: 2em; " value="＋" />
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card card-skin future"
                             style="display: flex; flex-direction: column;justify-content: space-between;">
@@ -569,13 +597,13 @@
                                     </div>
                                 </div>
                                 <ul>
-                                    <li>ここに現在のスキルなどを書く</li>
+                                    <li>ここに現在のスキルなどを記述</li>
                                 </ul>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <input type="text" style="width: calc(100% - 3em); line-height: 1.5em;" />
                                 <input type="button" style="width: 2em; " value="＋" />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -600,11 +628,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>新人研修</td>
-                                    <td>2023年4月3日</td>
-                                    <td style="text-align: center;">
-                                        済
-                                    </td>
+                                    <td>食品衛生研修</td>
+                                    <td>2023年8月20日</td>
+                                    <td style="text-align: center;">済</td>
                                 </tr>
                                 <tr>
                                     <td>ビジネスマナー研修</td>
@@ -659,6 +685,13 @@
                                     <td>2024年1月14日</td>
                                     <td style="text-align: center;">済</td>
                                 </tr>
+                                <tr>
+                                    <td>人事面談</td>
+                                    <td>高橋</td>
+                                    <td>会議室（大）</td>
+                                    <td>2023年9月29日</td>
+                                    <td style="text-align: center;">済</td>
+                                </tr>
                             </tbody>
                         </table>
                         <a href="#" style="text-align: end;padding: 0.5em;display: block;">全件表示</a>
@@ -666,6 +699,24 @@
                 </div>
             </div>
         </main>
+        <footer>
+            <div>
+                <p class="title">リンク集</p>
+            </div>
+            <div>
+                <ul style="display: flex; justify-content: space-around;">
+                    <li>
+                        <a href="#">1on1マニュアル</a>
+                    </li>
+                    <li>
+                        <a href="#">キャリア支援マニュアル</a>
+                    </li>
+                    <li>
+                        <a href="#">両立支援マニュアル</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
     </div>
 </body>
 <script>

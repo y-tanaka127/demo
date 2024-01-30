@@ -5,7 +5,8 @@
     <script src="https://kit.fontawesome.com/a670358f90.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8" />
-    <title>事務所紹介</title>
+    <meta name="viewport" content="width=device-width">
+    <title>事業紹介</title>
     <style>
         * {
             margin: 0;
@@ -416,7 +417,7 @@
 
             div.office-list {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
 
                 div.office {
                     box-sizing: content-box;
@@ -476,6 +477,54 @@
                 margin: 0.2em;
             }
         }
+
+        div.search {
+            div.tag-list {
+                div.tag-group {
+                    display: flex;
+                    flex-direction: column;
+                    border: 2px black solid;
+
+                    p.title {
+                        border-bottom: 2px black solid;
+                        background-color: lightblue;
+                        font-weight: bold;
+                    }
+
+                    div {
+                        position: relative;
+                        margin: 0.2em;
+
+                        input[type="checkbox"]+label::before {
+                            border: 1px solid black;
+                            content: '　';
+                            display: inline-block;
+                            width: 1em;
+                            height: 1em;
+                            position: absolute;
+                            top: 10%
+                        }
+
+                        input[type="checkbox"]:checked+label::after {
+                            content: '✓';
+                            position: absolute;
+                            font-size: 1.5em;
+                            left: 0;
+                            top: -30%;
+                        }
+                    }
+                }
+            }
+        }
+
+        button {
+            background-color: lightblue;
+            padding: 0.2em 1em;
+            font-weight: bold;
+            /* border: none; */
+            /* border-left: 3px black solid; */
+            margin: 0.2em;
+        }
     </style>
 </head>
 
@@ -483,7 +532,7 @@
     <header>
         <div>
             <img class="logo" src="./illust/logo.png" />
-            <h1>社内ポータル - 事務所紹介</h1>
+            <h1>社内ポータル - 事業紹介</h1>
         </div>
         <div>
             <input type="checkbox" id="check">
@@ -494,7 +543,7 @@
                 <ul class="nav__list">
                     <li class="nav__item"><a href="./mypage.html">マイページ</a></li>
                     <li class="nav__item"><a href="./member.html">メンバー紹介</a></li>
-                    <li class="nav__item"><a href="./office.html">事務所紹介</a></li>
+                    <li class="nav__item"><a href="./office.html">事業紹介</a></li>
                     <li class="nav__item"><a href="./consultation.html">相談窓口</a></li>
                 </ul>
             </nav>
@@ -510,15 +559,15 @@
                     <div id="slide" class="slide">
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事務所の紹介①</p>
+                            <p>事業の紹介①</p>
                         </div>
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事務所の紹介②</p>
+                            <p>事業の紹介②</p>
                         </div>
                         <div>
                             <!-- <img src="/APP/work/img/path" /> -->
-                            <p>事務所の紹介③</p>
+                            <p>事業の紹介③</p>
                         </div>
                     </div>
                     <!-- 左右のボタン -->
